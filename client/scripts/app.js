@@ -3,7 +3,13 @@
 var app = {};
 
 app.init = function(){
+  $(document).ready(function(){
+    $(".username").on("click", app.addFriend());
+  });
 
+  $(document).ready(function(){
+    $(".button").on("click", app.handleSubmit());
+  })
 };
 
 var Message = function(username, text, roomname){
@@ -58,7 +64,7 @@ app.clearMessages = function(){
 
 app.addMessage = function(message){
   var node = document.createElement("div");
-  var messageNode = document.createTextNode(message);
+  var messageNode = document.createTextNode(Message);
   node.appendChild(messageNode);
   document.getElementById("chats").appendChild(node);
 };
@@ -70,7 +76,7 @@ app.addRoom = function(roomName){
   document.getElementById("roomSelect").appendChild(node); 
 };
 
-app.user = {
+app.handleSubmit = function(){
 
 }
 
@@ -78,9 +84,6 @@ app.addFriend = function(){
 
 };
 
-$(document).ready(function(){
-  $(".username").on("click", app.addFriend());
-});
 
 
 
