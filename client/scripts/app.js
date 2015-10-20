@@ -1,9 +1,19 @@
 // YOUR CODE HERE:
 
-window.app = {};
+var app;
+//same as doing $(documen).ready, so that all code runs when doc is ready
+$(function(){
+  app = {
 
-app.init = function(){
-  app.server = 'https://api.parse.com/1/classes/chatterbox';
+
+app.server = 'https://api.parse.com/1/classes/chatterbox';
+
+
+init : function(){
+  //getting the username
+  
+
+
   app.fetch();
 
  
@@ -113,7 +123,8 @@ $(document).ready(function(){
   setInterval(app.init, 1000);
 });
 
-
+  };
+}());
 
 
 
