@@ -1,4 +1,5 @@
 // YOUR CODE HERE:
+
 var app = {};
 
 app.init = function(){
@@ -69,11 +70,17 @@ app.addRoom = function(roomName){
   document.getElementById("roomSelect").appendChild(node); 
 };
 
+app.user = {
+
+}
+
 app.addFriend = function(){
-  return true;
+
 };
 
-$(".username").on("click", app.addFriend());
+$(document).ready(function(){
+  $(".username").on("click", app.addFriend());
+});
 
 
 
