@@ -6,16 +6,20 @@ app.init = function(){
   app.server = 'https://api.parse.com/1/classes/chatterbox';
   app.fetch();
 
-  $(document).ready(function(){
-    $(".username").on("click", app.addFriend());
-  });
-
- $(document).ready(function(){
-    $(".button").on("click", app.handleSubmit());
-  })
-
  
 };
+
+ $(document).ready(function(){
+    app.init();
+    $(".button").on("click", function(){
+      event.preventDefault();
+      app.handleSubmit()
+    });
+  })
+  $(document).ready(function(){
+    app.init();
+    $(".username").on("click", app.addFriend());
+  });
 
 // var message = {
 // "username": username,
@@ -49,9 +53,12 @@ app.fetch = function(){
     // data: JSON.stringify(message),
     contentType: 'application/json',
     success: function (data) {
-      for(var i = 0; i < data.length; i++){
-        for(var key in data[i])
-        $(".chat").append(data[i][key]);
+         for(var i = 0; i < data.results.length; i++){
+        var message = data.results[i]
+        if(message.text !== undefined){
+          if(message.username===undefined){ return; }
+          app.addMessage(message)
+        }
       }
       console.log(data);
       console.log('chatterbox: Message sent');
@@ -70,11 +77,9 @@ app.clearMessages = function(){
   }
 };
 
-app.addMessage = function(message, username){
-  var node = document.createElement("div");
-  var messageNode = document.createTextNode(message);
-  node.appendChild(messageNode);
-  document.getElementById("chats").appendChild(node);
+app.addMessage = function(message){
+  $(".chat").prepend("<div class=username>"+ message.username + ": "+"</div>"+"<div>"+message.text+"</div>")
+
   app.send(message);
 };
 
@@ -86,13 +91,16 @@ app.addRoom = function(roomName){
 };
 
 app.handleSubmit = function(){
-  $(document).ready(function(){
-    $(".button").on("click", function(){
-    event.preventDefault();
-    var userMessage = $("#message").val()
+  // $(document).ready(function(){
+    // $(".button").on("click", function(){
+    
+    var userMessage = {};
+    userMessage.username = $("#username").val()
+    userMessage.text = $("#message").val()
     app.addMessage(userMessage);
-    });
-  });
+    app.send(userMessage)
+    // });
+  // });
 };
 
 app.addFriend = function(){
@@ -100,9 +108,10 @@ app.addFriend = function(){
 };
 
 
+
 $(document).ready(function(){
-  app.init();
-})
+  setInterval(app.init, 1000);
+});
 
 
 

@@ -59,9 +59,10 @@ form input[type=text] {
     padding: 5px;
 }
 
+
 .chat {
     padding: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 20px;
     background-color: #eee;
 }
 
