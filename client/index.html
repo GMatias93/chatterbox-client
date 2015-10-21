@@ -13,6 +13,8 @@
     <script src="scripts/app.js"></script>
   </head>
   <body>
+    <script>
+    </script>
     <div id="main">
       <h1>chatterbox</h1>
       <select id="roomSelect">
@@ -20,15 +22,20 @@
 
       </select>
       <!-- Your HTML goes here! -->
-      <form>
-        username: <input id="username"></input><br>
-        Message: <input class="message" id="message"></input>
-        <button class="button">Submit</button>
-      </form>
-      <div class="chat" id="chats">
-        <div class="username"></div>
-        <!-- <div class="text"></div> -->
+      <div class="spinner"><img src="images/spiffygif_46x46.gif"></div>
+      <div id="rooms">
+        Room:
+        <select id="roomSelect"> 
+        </select>
       </div>
+      <form action="#" id="send" method="post">
+        <input type="text" name="message" id="message"/>
+        <input type="submit" name="submit" class="submit"/>
+      </form>
+      <div id="chats"></div>
+      <script>
+      $(app.init.bind(app));
+      </script>
     </div>
   </body>
 </html>
